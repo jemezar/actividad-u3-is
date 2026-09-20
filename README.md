@@ -1,6 +1,6 @@
-# Sistema de Nómina Orientado a Objetos - CIPA
+# Sistema de Nómina Orientado a Objetos
 
-Proyecto académico desarrollado para la Universidad de Cartagena con arquitectura limpia, principios SOLID y metodología ágil Scrum con TDD.
+Actividad de Aprendizaje de la Unidad 3 Desarrollo y Pruebas de Software.
 
 ## Metodología de Desarrollo
 * **Marco de trabajo:** Scrum apoyado con prácticas de Extreme Programming (XP).
@@ -14,6 +14,4 @@ Proyecto académico desarrollado para la Universidad de Cartagena con arquitectu
 * **I (Segregación de Interfaces):** Beneficios y deducciones opcionales desacoplados por comportamiento.
 * **D (Inversión de Dependencias):** Los servicios de nómina dependen de la abstracción `Empleado`, no de implementaciones concretas.
 
-## Ejecución de Pruebas Unitarias
-Ejecuta en la raíz del proyecto:
-```bash
+![portada](image/portada.png)
