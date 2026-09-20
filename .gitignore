@@ -1,0 +1,4 @@
+# No requiere dependencias externas obligatorias (usa la librería estándar de Python)
+# Para cobertura y ejecución avanzada de pruebas se recomienda pytest:
+pytest>=8.0.0
+pytest-cov>=4.1.0
