@@ -34,7 +34,7 @@ def main():
 
     comision = EmpleadoPorComision(
         identificacion="CC-103",
-        nombre="Sofia Ramirez",
+        nombre="Rodolfo Lopez",
         anios_antiguedad=3,
         salario_base=1_800_000.0,
         porcentaje_comision=0.04,

@@ -17,4 +17,3 @@ Proyecto académico desarrollado para la Universidad de Cartagena con arquitectu
 ## Ejecución de Pruebas Unitarias
 Ejecuta en la raíz del proyecto:
 ```bash
-python -m unittest discover -s tests
