@@ -1,35 +1,98 @@
-"""Módulo de servicios para el procesamiento y reporte de nómina."""
+"""
+Módulo de servicios: Procesamiento y Liquidación Contable de Nómina.
+
+Este módulo implementa el orquestador contable que procesa colecciones de empleados,
+calcula las liquidaciones individuales y consolida las cifras para el balance empresarial.
+Cumple con el principio de Inversión de Dependencias (DIP) al operar sobre la abstracción Empleado.
+"""
+
 from typing import List, Dict, Any
 from src.modelos import Empleado
 
 
 class ServicioLiquidacionNomina:
-    """Gestiona el cálculo masivo y la generación de reportes contables."""
+    """
+    Servicio encargado de liquidar y consolidar la nómina empresarial.
+    Permite registrar colaboradores y generar reportes analíticos de nómina.
+    """
 
     def __init__(self):
-        self._empleados: List[Empleado] = []
+        self._nomina: List[Empleado] = []
 
-    def registrar_empleado(self, empleado: Empleado) -> None:
+    def agregar_empleado(self, empleado: Empleado) -> None:
         """Registra un empleado en el sistema de nómina."""
-        self._empleados.append(empleado)
+        self._nomina.append(empleado)
+
+    # Alias para compatibilidad con llamadas existentes
+    registrar_empleado = agregar_empleado
+
+    @property
+    def empleados(self) -> List[Empleado]:
+        """Retorna una copia superficial de la lista de empleados registrados."""
+        return list(self._nomina)
 
     def liquidar_empleado(self, empleado: Empleado) -> Dict[str, Any]:
-        """Genera el desglose contable individual de un empleado."""
+        """
+        Calcula el desglose financiero individual de un empleado.
+        
+        :param empleado: Instancia de una subclase de Empleado.
+        :return: Diccionario estructurado con los rubros devengados y deducidos.
+        """
+        salario_bruto = empleado.calcular_salario_bruto()
+        beneficios = empleado.calcular_beneficios_empresa()
+        deducciones_ley = empleado.calcular_deducciones_obligatorias()
+        deducciones_vol = empleado.calcular_deducciones_voluntarias()
+        salario_neto = empleado.calcular_salario_neto()
+
         return {
-            "id": empleado.identificacion,
+            "identificacion": empleado.identificacion,
+            "id": empleado.identificacion,  # retrocompatibilidad
             "nombre": empleado.nombre,
-            "tipo": empleado.__class__.__name__,
-            "salario_bruto": empleado.calcular_salario_bruto(),
-            "beneficios": empleado.calcular_beneficios_empresa(),
-            "deducciones_obligatorias": empleado.calcular_deducciones_obligatorias(),
-            "deducciones_voluntarias": empleado.calcular_deducciones_voluntarias(),
-            "salario_neto": empleado.calcular_salario_neto()
+            "cargo_tipo": empleado.__class__.__name__,
+            "tipo": empleado.__class__.__name__,  # retrocompatibilidad
+            "anios_antiguedad": empleado.anios_antiguedad,
+            "salario_bruto": salario_bruto,
+            "beneficio_alimentacion": beneficios,
+            "beneficios": beneficios,  # retrocompatibilidad
+            "deducciones_ley": deducciones_ley,
+            "deducciones_obligatorias": deducciones_ley,  # retrocompatibilidad
+            "deducciones_voluntarias": deducciones_vol,
+            "salario_neto": salario_neto,
         }
 
-    def liquidar_todos(self) -> List[Dict[str, Any]]:
-        """Liquida a todos los empleados registrados."""
-        return [self.liquidar_empleado(emp) for emp in self._empleados]
+    def generar_reporte_consolidado(self) -> List[Dict[str, Any]]:
+        """Genera el reporte detallado de nómina para todos los empleados vinculados."""
+        return [self.liquidar_empleado(emp) for emp in self._nomina]
 
-    def calcular_total_nomina_empresa(self) -> float:
+    # Alias para compatibilidad
+    liquidar_todos = generar_reporte_consolidado
+
+    def calcular_totales_empresa(self) -> Dict[str, float]:
+        """
+        Consolida las cifras globales de nómina que asume la empresa:
+        - Total Devengado Bruto
+        - Total Beneficios Empresa (ej. alimentación)
+        - Total Descuentos de Ley (Salud, Pensión, ARL)
+        - Total Descuentos Voluntarios (ej. Fondo de Ahorro)
+        - Total Desembolso Neto a Trabajadores
+        """
+        total_bruto = sum(emp.calcular_salario_bruto() for emp in self._nomina)
+        total_beneficios = sum(emp.calcular_beneficios_empresa() for emp in self._nomina)
+        total_deducciones_ley = sum(emp.calcular_deducciones_obligatorias() for emp in self._nomina)
+        total_deducciones_vol = sum(emp.calcular_deducciones_voluntarias() for emp in self._nomina)
+        total_neto = sum(emp.calcular_salario_neto() for emp in self._nomina)
+
+        return {
+            "total_salario_bruto": total_bruto,
+            "total_beneficios_empresa": total_beneficios,
+            "total_deducciones_ley": total_deducciones_ley,
+            "total_deducciones_voluntarias": total_deducciones_vol,
+            "total_salario_neto": total_neto,
+        }
+
+    def calcular_gran_total_neto(self) -> float:
         """Calcula el desembolso total de nómina neta por parte de la empresa."""
-        return sum(emp.calcular_salario_neto() for emp in self._empleados)
+        return sum(emp.calcular_salario_neto() for emp in self._nomina)
+
+    # Alias para compatibilidad
+    calcular_total_nomina_empresa = calcular_gran_total_neto
