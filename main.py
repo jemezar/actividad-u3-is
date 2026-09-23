@@ -78,7 +78,7 @@ def main():
     # Caso 1: Asalariado con más de 5 años (recibe bono antigüedad 10% + bono alimentación)
     emp_asalariado = EmpleadoAsalariado(
         identificacion="ASAL-001",
-        nombre="Laura Gómez",
+        nombre="Jorge Meza",
         anios_antiguedad=6,
         salario_fijo=3_500_000.0
     )
@@ -86,7 +86,7 @@ def main():
     # Caso 2: Empleado por Horas con horas extras (> 40h) y ahorro voluntario activo (> 1 año)
     emp_horas = EmpleadoPorHoras(
         identificacion="HORAS-002",
-        nombre="Pedro Martínez",
+        nombre="Juan Assia",
         anios_antiguedad=2,
         horas_trabajadas=48.0,   # 40 horas base + 8 horas extras con recargo del 50%
         tarifa_hora=25_000.0,
@@ -96,7 +96,7 @@ def main():
     # Caso 3: Empleado por Comisión con ventas superiores a $20M (recibe bono adicional 3% + alimentación)
     emp_comision = EmpleadoPorComision(
         identificacion="COMIS-003",
-        nombre="Sofía Ramírez",
+        nombre="Yaismer Figueroa",
         anios_antiguedad=3,
         salario_base=2_000_000.0,
         porcentaje_comision=0.05,     # 5% de comisión
@@ -106,7 +106,7 @@ def main():
     # Caso 4: Empleado Temporal a término fijo (sin bonos ni beneficios)
     emp_temporal = EmpleadoTemporal(
         identificacion="TEMP-004",
-        nombre="Andrés Torres",
+        nombre="Juan Hernandez",
         anios_antiguedad=1,
         salario_mensual=1_800_000.0
     )
