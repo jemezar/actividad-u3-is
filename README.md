@@ -135,7 +135,3 @@ Para ejecutar la demostración completa del sistema de nómina y observar el bal
 ```bash
 python main.py
 ```
-
----
-
-![portada](image/portada.png)
