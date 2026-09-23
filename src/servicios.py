@@ -3,17 +3,19 @@ Módulo de servicios: Procesamiento y Liquidación Contable de Nómina.
 
 Este módulo implementa el orquestador contable que procesa colecciones de empleados,
 calcula las liquidaciones individuales y consolida las cifras para el balance empresarial.
-Cumple con el principio de Inversión de Dependencias (DIP) al operar sobre la abstracción Empleado.
+Cumple con el principio de Inversión de Dependencias (DIP) al operar sobre la abstracción Empleado
+y delegar la persistencia en abstracciones ExportadorReporte.
 """
 
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional
 from src.modelos import Empleado
+from src.exportadores import ExportadorReporte, ExportadorNominaCSV
 
 
 class ServicioLiquidacionNomina:
     """
     Servicio encargado de liquidar y consolidar la nómina empresarial.
-    Permite registrar colaboradores y generar reportes analíticos de nómina.
+    Permite registrar colaboradores, generar balances y exportar reportes analíticos de nómina.
     """
 
     def __init__(self):
@@ -96,3 +98,17 @@ class ServicioLiquidacionNomina:
 
     # Alias para compatibilidad
     calcular_total_nomina_empresa = calcular_gran_total_neto
+
+    def exportar_reporte(self, ruta_destino: str, exportador: Optional[ExportadorReporte] = None) -> str:
+        """
+        Exporta el reporte consolidado de nómina utilizando la estrategia de exportación indicada.
+        Aplica Inversión de Dependencias (DIP) y Abierto/Cerrado (OCP).
+        
+        :param ruta_destino: Archivo de salida (ej. 'reporte_nomina.csv').
+        :param exportador: Instancia de ExportadorReporte. Por defecto usa ExportadorNominaCSV.
+        :return: Ruta del archivo generado.
+        """
+        if exportador is None:
+            exportador = ExportadorNominaCSV()
+        registros = self.generar_reporte_consolidado()
+        return exportador.exportar(registros, ruta_destino)

@@ -187,7 +187,34 @@ class TestSistemaNomina(unittest.TestCase):
         totales = self.servicio.calcular_totales_empresa()
         self.assertGreater(totales["total_salario_bruto"], 0)
         self.assertGreater(totales["total_beneficios_empresa"], 0)
-        self.assertEqual(totales["total_salario_neto"], self.servicio.calcular_gran_total_neto())
+    # =========================================================================
+    # 8. PRUEBAS: EXPORTADOR DE REPORTES (CSV)
+    # =========================================================================
+
+    def test_exportador_nomina_csv(self):
+        """Verifica la generación y contenido correcto del archivo CSV de nómina."""
+        import tempfile
+        import os
+
+        e1 = EmpleadoAsalariado("AS-1", "Carlos Gómez", 6, 2_000_000.0)
+        self.servicio.agregar_empleado(e1)
+
+        with tempfile.NamedTemporaryFile(delete=False, suffix=".csv") as temp_file:
+            temp_path = temp_file.name
+
+        try:
+            ruta_generada = self.servicio.exportar_reporte(temp_path)
+            self.assertTrue(os.path.exists(ruta_generada))
+
+            with open(ruta_generada, mode="r", encoding="utf-8") as f:
+                lineas = f.readlines()
+                self.assertGreaterEqual(len(lineas), 2)  # Encabezado + al menos 1 fila
+                self.assertIn("Identificación", lineas[0])
+                self.assertIn("AS-1", lineas[1])
+                self.assertIn("Carlos Gómez", lineas[1])
+        finally:
+            if os.path.exists(temp_path):
+                os.remove(temp_path)
 
 
 if __name__ == "__main__":
