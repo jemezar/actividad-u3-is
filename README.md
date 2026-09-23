@@ -15,10 +15,11 @@
 | **Jorge Enrique Meza Rocha** (`jemezar`) | `jmezar@unicartagena.edu.co` | Integración, CLI/Reporte, Documentación y Arquitectura |
 | **Juan Guillermo Hernández Gastelbondo** (`juanguillo125`) | `jhernandezg5@unicartagena.edu.co` | Orquestador Contable, Servicios y Suite de Pruebas Unitarias |
 | **Ever Antonio Assia Ibañez** (`AntonioAssia`) | `eassiai@unicartagena.edu.co` | Dominio OOP, Deducciones de Ley y Reglas de Negocio |
+| **Yaismer Luis Figueroa Morelo** (`Yaismer281122`) | `yfigueroam@unicartagena.edu.co` | Módulo de Exportación Contable (CSV), Persistencia y DIP |
 
 ---
 
-##Descripción del Proyecto y Reglas de Negocio
+## Descripción del Proyecto y Reglas de Negocio
 
 El proyecto consiste en el diseño e implementación de un **Sistema de Nómina Empresarial** modular y robusto bajo el paradigma de **Programación Orientada a Objetos (POO)** y los principios **SOLID**, permitiendo liquidar periódicamente salarios, beneficios corporativos y deducciones para distintos esquemas laborales:
 
@@ -58,50 +59,54 @@ El proyecto consiste en el diseño e implementación de un **Sistema de Nómina 
 El diseño de la solución garantiza mantenibilidad y extensibilidad:
 
 1. **S - Responsabilidad Única (*Single Responsibility Principle*):**
-   * Cada clase de empleado (`EmpleadoAsalariado`, `EmpleadoPorHoras`, etc.) encapsula únicamente las reglas matemáticas y de negocio de su modalidad laboral.
-   * `ServicioLiquidacionNomina` se responsabiliza exclusivamente de la liquidación masiva, consolidación y balance contable de la empresa.
+   * Cada clase de empleado (`EmpleadoAsalariado`, `EmpleadoPorHoras`, etc.) encapsula únicamente las reglas matemáticas de su modalidad laboral.
+   * `ServicioLiquidacionNomina` se responsabiliza exclusivamente de la liquidación masiva y balance de la empresa.
+   * `ExportadorNominaCSV` asume la responsabilidad exclusiva de serialización y persistencia de reportes contables.
 
 2. **O - Abierto/Cerrado (*Open/Closed Principle*):**
-   * El sistema está abierto a la extensión y cerrado a la modificación. Para incorporar un nuevo perfil de contratación (ej. *Empleado por Prestación de Servicios* o *Practicante SENA*), solo se debe heredar de `Empleado` e implementar `calcular_salario_bruto()`, sin alterar las clases existentes.
+   * La clase abstracta `Empleado` permite añadir nuevas modalidades contractuales sin modificar el código base preexistente.
+   * La interfaz abstracta `ExportadorReporte` permite incorporar nuevos formatos de exportación (JSON, Excel, PDF) sin alterar el orquestador de nómina.
 
 3. **L - Sustitución de Liskov (*Liskov Substitution Principle*):**
-   * Cualquier subtipo de `Empleado` puede sustituir a la clase base en cualquier contexto sin alterar la consistencia de los cálculos ni romper contratos pre/post-condición (`calcular_salario_neto()`).
+   * Cualquier subtipo de `Empleado` sustituye de manera uniforme a la clase base sin alterar los contratos pre/post-condición (`calcular_salario_neto()`).
 
 4. **I - Segregación de Interfaces (*Interface Segregation Principle*):**
-   * Se separan claramente los métodos de ingresos directos (`calcular_salario_bruto()`), beneficios opcionales corporativos (`calcular_beneficios_empresa()`) y deducciones voluntarias (`calcular_deducciones_voluntarias()`), evitando forzar a las subclases a implementar métodos innecesarios.
+   * Separación explícita de métodos de ingresos directos, beneficios corporativos y deducciones voluntarias, impidiendo dependencias innecesarias en tipos que no los aplican.
 
 5. **D - Inversión de Dependencias (*Dependency Inversion Principle*):**
-   * `ServicioLiquidacionNomina` depende de la abstracción `Empleado`, no de implementaciones concretas.
+   * `ServicioLiquidacionNomina` depende de abstracciones (`Empleado` y `ExportadorReporte`), permitiendo inyección de dependencias flexible desacoplada de implementaciones concretas.
 
 ---
 
-##Metodología de Desarrollo y Control de Versiones
+## Metodología de Desarrollo y Control de Versiones
 
 El equipo implementó una combinación de **Scrum** y **Extreme Programming (XP)**:
 
 * **Gestión de Historias de Usuario e Iteraciones (Scrum):**
-  * La actividad se descompuso en historias de usuario correspondientes a cada perfil contractual, motor de deducciones y módulo de presentación.
+  * La actividad se descompuso en historias de usuario correspondientes a perfiles contractuales, motor de deducciones, módulo de reportes/persistencia y presentación.
 * **Prácticas XP Adoptadas:**
-  * **Test-Driven Development (TDD) / Pruebas Continuas:** Desarrollo de suite automatizada con `unittest` con cobertura sobre casos nominales y casos borde.
-  * **Refactorización y Código Limpio:** Eliminación de números mágicos mediante constantes con nombre semántico (`LIMITE_HORAS_ORDINARIAS`, `UMBRAL_VENTAS_BONO`), tipado estático (*Type Hints*) y comentarios técnicos según PEP-8.
-  * **Revisión de Código y Colaboración:** Simulación y trazabilidad de commits en equipo distribuyendo las contribuciones entre los integrantes en GitHub.
+  * **Test-Driven Development (TDD) / Pruebas Continuas:** Desarrollo de suite automatizada con `unittest` cubriendo casos nominales, casos borde y persistencia de datos.
+  * **Refactorización y Código Limpio:** Eliminación de números mágicos mediante constantes semánticas (`LIMITE_HORAS_ORDINARIAS`, `UMBRAL_VENTAS_BONO`), tipado estático (*Type Hints*) y comentarios técnicos según PEP-8.
+  * **Revisión de Código y Colaboración en Equipo:** Distribución de commits y trazabilidad entre los 4 integrantes del CIPA en GitHub.
 
 ---
 
-##Estructura del Repositorio
+## Estructura del Repositorio
 
 ```text
 actividad-u3-is/
 ├── src/
 │   ├── __init__.py
 │   ├── modelos.py          # Jerarquía OOP de Empleados, constantes y validaciones
-│   └── servicios.py        # Servicio orquestador y balance consolidado
+│   ├── servicios.py        # Orquestador contable, balances y exportación
+│   └── exportadores.py     # Estrategia de exportación de nómina (CSV/persistencia)
 ├── tests/
 │   ├── __init__.py
-│   └── test_nomina.py      # 18 pruebas unitarias automatizadas con unittest
+│   └── test_nomina.py      # 19 pruebas unitarias automatizadas con unittest
 ├── image/
 │   └── portada.png         # Recursos visuales del proyecto
-├── main.py                 # Punto de entrada y reporte en consola
+├── main.py                 # Punto de entrada, reporte en consola y exportación CSV
+├── reporte_nomina.csv      # Archivo consolidado de nómina generado
 ├── requirements.txt        # Dependencias opcionales
 ├── .gitignore              # Exclusiones de Git
 └── README.md               # Documentación general de la actividad
@@ -109,28 +114,32 @@ actividad-u3-is/
 
 ---
 
-##Ejecución de Pruebas Unitarias
+## Ejecución de Pruebas Unitarias
 
-Para ejecutar la suite automatizada de pruebas con el motor estándar de Python:
+Para ejecutar la suite automatizada de pruebas:
 
+```bash
+python tests/test_nomina.py
+```
+O con el módulo de descubrimiento estándar:
 ```bash
 python -m unittest discover tests
 ```
 
 Salida esperada:
 ```text
-..................
+...................
 ----------------------------------------------------------------------
-Ran 18 tests in 0.000s
+Ran 19 tests in 0.003s
 
 OK
 ```
 
 ---
 
-##Ejecución del Sistema
+## Ejecución del Sistema
 
-Para ejecutar la demostración completa del sistema de nómina y observar el balance consolidado:
+Para ejecutar la demostración completa del sistema de nómina y generar el reporte exportado:
 
 ```bash
 python main.py

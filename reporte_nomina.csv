@@ -1,0 +1,5 @@
+Identificación,Colaborador,Modalidad,Salario Bruto (COP),Beneficio Alimentación (COP),Deducciones de Ley (COP),Deducciones Voluntarias (COP),Salario Neto a Pagar (COP)
+ASAL-001,Laura Gómez,EmpleadoAsalariado,3850000.0,1000000.0,328097.0,0.0,4521903.0
+HORAS-002,Pedro Martínez,EmpleadoPorHoras,1300000.0,0.0,110786.0,26000.0,1163214.0
+COMIS-003,Sofía Ramírez,EmpleadoPorComision,4240000.0,1000000.0,361332.8,0.0,4878667.2
+TEMP-004,Andrés Torres,EmpleadoTemporal,1800000.0,0.0,153396.0,0.0,1646604.0

@@ -137,6 +137,11 @@ def main():
     except BusinessRuleException as err:
         print(f" [PASS] Validación exitosa (Ventas negativas capturadas): {err}")
 
+    # 5. Exportación del reporte a CSV para contabilidad
+    archivo_csv = "reporte_nomina.csv"
+    servicio.exportar_reporte(archivo_csv)
+    print(f"\n[+] Reporte de nómina exportado exitosamente a '{archivo_csv}'")
+
 
 if __name__ == "__main__":
     main()
