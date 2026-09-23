@@ -1,14 +1,14 @@
 # Sistema de Nómina CIPA 404 NOT FOUND
 
 **Actividad de Aprendizaje - Unidad 3 Desarrollo y Pruebas de Software **  
-**Asignatura:Ingeniería de Software**  
+**Asignatura:Ingeniería de Software
 **Programa:** Ingeniería de Software  
 **Institución:** Universidad de Cartagena  
 **Docente:** Ureliano Peñata Hernández  
 
 ---
 
-## 👥 Integrantes - CIPA *404 Not Found*
+## Integrantes - CIPA *404 Not Found*
 
 | Integrante | Correo Institucional | Rol Principal en el Proyecto |
 | :--- | :--- | :--- |
@@ -18,7 +18,7 @@
 
 ---
 
-## 📋 Descripción del Proyecto y Reglas de Negocio
+##Descripción del Proyecto y Reglas de Negocio
 
 El proyecto consiste en el diseño e implementación de un **Sistema de Nómina Empresarial** modular y robusto bajo el paradigma de **Programación Orientada a Objetos (POO)** y los principios **SOLID**, permitiendo liquidar periódicamente salarios, beneficios corporativos y deducciones para distintos esquemas laborales:
 
@@ -75,7 +75,7 @@ El diseño de la solución garantiza mantenibilidad y extensibilidad:
 
 ---
 
-## 🛠️ Metodología de Desarrollo y Control de Versiones
+##Metodología de Desarrollo y Control de Versiones
 
 El equipo implementó una combinación de **Scrum** y **Extreme Programming (XP)**:
 
@@ -88,7 +88,7 @@ El equipo implementó una combinación de **Scrum** y **Extreme Programming (XP)
 
 ---
 
-## 🚀 Estructura del Repositorio
+##Estructura del Repositorio
 
 ```text
 actividad-u3-is/
@@ -109,7 +109,7 @@ actividad-u3-is/
 
 ---
 
-## 🧪 Ejecución de Pruebas Unitarias
+##Ejecución de Pruebas Unitarias
 
 Para ejecutar la suite automatizada de pruebas con el motor estándar de Python:
 
@@ -128,7 +128,7 @@ OK
 
 ---
 
-## 💻 Ejecución del Sistema
+##Ejecución del Sistema
 
 Para ejecutar la demostración completa del sistema de nómina y observar el balance consolidado:
 
