@@ -1,7 +1,7 @@
-# Sistema de Nómina Orientado a Objetos (SOLID)
+# Sistema de Nómina CIPA 404 NOT FOUND
 
-**Actividad de Aprendizaje - Unidad 3**  
-**Asignatura:** Desarrollo y Pruebas de Software  
+**Actividad de Aprendizaje - Unidad 3 Desarrollo y Pruebas de Software **  
+**Asignatura:Ingeniería de Software**  
 **Programa:** Ingeniería de Software  
 **Institución:** Universidad de Cartagena  
 **Docente:** Ureliano Peñata Hernández  
