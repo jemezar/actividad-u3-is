@@ -1,17 +1,17 @@
 # Sistema de Nómina Orientado a Objetos
 
 Actividad de Aprendizaje de la Unidad 3 Desarrollo y Pruebas de Software.
-Cipa 404 Not Found
 
-Jorge Enrique Meza Rocha
-Ever Antonio Assia Ibañez
-Yaismer Luis Figueroa Morelo
-Juan Guillermo Hernandez Gastelbondo
+* Cipa 404 Not Found
+* Jorge Enrique Meza Rocha
+* Ever Antonio Assia Ibañez
+* Yaismer Luis Figueroa Morelo
+* Juan Guillermo Hernandez Gastelbondo
 
-Universidad de Cartagena
-Ingeniería de Software
-Ingeniería de Software
-Ureliano Peñata Hernandez
+* Universidad de Cartagena
+* Ingeniería de Software
+* Ingeniería de Software
+* Ureliano Peñata Hernandez
 
 ## Metodología de Desarrollo
 * **Marco de trabajo:** Scrum apoyado con prácticas de Extreme Programming (XP).
