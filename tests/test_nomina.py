@@ -11,7 +11,13 @@ Valida todas las reglas de negocio descritas en la Actividad Unidad 3:
 7. Servicio de liquidación contable y consolidación de balances empresariales.
 """
 
+import sys
+from pathlib import Path
 import unittest
+
+# Asegurar que la raíz del proyecto esté en sys.path para ejecución directa del archivo
+sys.path.insert(0, str(Path(__file__).resolve().parent.parent))
+
 from src.modelos import (
     Empleado,
     EmpleadoAsalariado,
