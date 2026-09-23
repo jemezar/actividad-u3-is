@@ -43,7 +43,7 @@ def main():
 
     temporal = EmpleadoTemporal(
         identificacion="CC-104",
-        nombre="Andrés Torres",
+        nombre="Ever Assia",
         anios_antiguedad=0,
         salario_mensual=1_500_000.0
     )
