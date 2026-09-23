@@ -18,14 +18,14 @@ def main():
     # 1. Instanciación de empleados según las reglas del caso de estudio
     asalariado = EmpleadoAsalariado(
         identificacion="CC-101",
-        nombre="Jorge Meza",
+        nombre="Laura Gómez",
         anios_antiguedad=6,       # Aplica bono 10% por tener > 5 años
         salario_fijo=3_000_000.0
     )
 
     horas = EmpleadoPorHoras(
         identificacion="CC-102",
-        nombre="Ureliano Peñata",
+        nombre="Pedro Martínez",
         anios_antiguedad=2,       # Aplica a fondo de ahorro por > 1 año
         horas_trabajadas=48.0,    # 40 normales + 8 extras (x1.5)
         tarifa_hora=20_000.0,
@@ -34,7 +34,7 @@ def main():
 
     comision = EmpleadoPorComision(
         identificacion="CC-103",
-        nombre="Rodolfo Lopez",
+        nombre="Sofia Ramirez",
         anios_antiguedad=3,
         salario_base=1_800_000.0,
         porcentaje_comision=0.04,
@@ -43,7 +43,7 @@ def main():
 
     temporal = EmpleadoTemporal(
         identificacion="CC-104",
-        nombre="Ever Assia",
+        nombre="Andrés Torres",
         anios_antiguedad=0,
         salario_mensual=1_500_000.0
     )

@@ -1,4 +1,18 @@
-# No requiere dependencias externas obligatorias (usa la librería estándar de Python)
-# Para cobertura y ejecución avanzada de pruebas se recomienda pytest:
-pytest>=8.0.0
-pytest-cov>=4.1.0
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Pytest & Coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Ambientes virtuales
+venv/
+.venv/
+env/
+
+# IDEs
+.vscode/
+.idea/
